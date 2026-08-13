@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Default locale: English. It is the universal fallback, and the learner
+     already reads some. `values-de` and `values-b+zh+Hans` must define every
+     string in here — lint's MissingTranslation is a hard CI gate.
+
+     Brand words and German vocabulary carry translatable="false": translating
+     the name of the app, or the German word a screen is teaching, would be a
+     bug rather than a courtesy. -->
+<resources>
+    <string name="app_name" translatable="false">Wortkatze</string>
+    <string name="app_name_zh" translatable="false">词猫</string>
+
+    <string name="app_tagline">Catch German words!</string>
+    <string name="vocab_load_failed">The word list could not be loaded.</string>
+</resources>

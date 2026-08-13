@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Swiss spelling throughout: always ss, never ß (the same rule the word list
+     follows, so the UI never contradicts the cards). -->
+<resources>
+    <string name="app_tagline">Deutsche Wörter fangen!</string>
+    <string name="vocab_load_failed">Die Wortliste konnte nicht geladen werden.</string>
+</resources>
