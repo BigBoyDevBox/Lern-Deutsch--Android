@@ -2,6 +2,9 @@
 
 Read this once, before your first step. It is short on purpose.
 
+The prompt that starts a step — and the rule that one step is one session — is
+in [25](25-implementer-prompt.md).
+
 ## The shape of a step
 
 1. Read the step in [22](22-roadmap-foundations.md) or

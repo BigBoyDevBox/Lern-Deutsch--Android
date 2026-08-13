@@ -43,6 +43,7 @@ them.** They are reference, not preamble.
 | [21 testing](21-testing.md) | What must be tested, and how |
 | [22](22-roadmap-foundations.md)–[23](23-roadmap-modes.md) roadmap | The PR-sized steps, in order |
 | [24 implementer rules](24-implementer-rules.md) | Working agreements |
+| [25 implementer prompt](25-implementer-prompt.md) | The prompt that starts a step, and the milestone map |
 
 ## The rules that never bend
 

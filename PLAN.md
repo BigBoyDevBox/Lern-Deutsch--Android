@@ -37,7 +37,7 @@ document that remembers, and a lot of confetti.
 | **How it looks and feels** | [07 design language](docs/plan/07-design-language.md) · [08 juice](docs/plan/08-juice.md) · [09 mascot](docs/plan/09-mascot.md) |
 | **Screens** | [10 navigation](docs/plan/10-navigation.md) · [11 home](docs/plan/11-home-screen.md) · [12–16 modes](docs/plan/) · [17 rewards](docs/plan/17-rewards.md) |
 | **Platform** | [18 audio & haptics](docs/plan/18-audio-haptics.md) · [19 localization](docs/plan/19-localization.md) · [20 accessibility](docs/plan/20-accessibility.md) · [21 testing](docs/plan/21-testing.md) |
-| **What to build, in order** | [22 roadmap I](docs/plan/22-roadmap-foundations.md) · [23 roadmap II](docs/plan/23-roadmap-modes.md) · [24 implementer rules](docs/plan/24-implementer-rules.md) |
+| **What to build, in order** | [22 roadmap I](docs/plan/22-roadmap-foundations.md) · [23 roadmap II](docs/plan/23-roadmap-modes.md) · [24 implementer rules](docs/plan/24-implementer-rules.md) · [25 implementer prompt](docs/plan/25-implementer-prompt.md) |
 
 Decisions that were hard to reverse are recorded as ADRs in
 [`docs/decisions/`](docs/decisions/). Deviations from this plan get written
