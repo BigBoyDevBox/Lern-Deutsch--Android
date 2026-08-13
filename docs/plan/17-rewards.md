@@ -56,10 +56,16 @@ badge scales in with confetti, and a tone plays. It never happens silently.
 
 Default 20 answers, adjustable 10/20/40 in Settings. Tracked in
 `Progress.goalAnswered` against `Progress.goalDay`; when `goalDay` is not
-today, reset to 0 first.
+today, reset the count to 0 and set `goalDay` to today.
 
-Completing it fires **once** — guard on `goalDay`, not on the count, or every
-answer past 20 re-celebrates.
+Completing it fires **once**, and that needs a *second* field,
+`goalCompletedDay`. One field cannot do both jobs: `goalDay` is set to today
+the moment the first answer of the day lands, so by the time the goal is
+reached it already equals today and can no longer distinguish "counted today"
+from "celebrated today". Celebrate when
+`goalAnswered >= dailyGoal && goalCompletedDay != today`, then set
+`goalCompletedDay = today`. Never guard on the count alone, or every answer
+past 20 re-celebrates.
 
 ## The streak
 

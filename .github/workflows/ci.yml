@@ -70,6 +70,14 @@ jobs:
       - name: Test, lint, and assemble
         run: ./gradlew testDebugUnitTest lintDebug assembleDebug
 
+      # The release variant is the only one that runs R8, and R8 failures are
+      # invisible until they aren't: a missing keep rule for a serialization
+      # entry point crashes at runtime, in a build nobody made until the tag
+      # was already pushed. Two extra minutes here means every PR proves the
+      # APK a learner would actually install still builds and shrinks.
+      - name: Assemble release (proves R8 / minification)
+        run: ./gradlew assembleRelease
+
       - name: Upload debug APK
         uses: actions/upload-artifact@v7
         with:

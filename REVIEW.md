@@ -84,6 +84,67 @@ formal in Mainland usage than Sie is in German, so 你 is a reasonable register
 for a learner's phrasebook. **Deferred:** raise it on
 `L-K-M/Lern-Deutsch--Pebble` as a vocabulary question for a human to settle.
 
+### Round 2 — refuted
+
+**„`app/proguard-rules.pro` is missing a `$$serializer` keep rule; release
+builds may crash deserializing `vocab.json`" (labelled BLOCKER).**
+Checked against a real minified build rather than argued. `./gradlew
+assembleRelease` with `isMinifyEnabled = true`, then
+`app/build/outputs/mapping/release/mapping.txt`:
+
+```
+ch.lkmc.wortkatze.learn.Card$$serializer       -> da:
+ch.lkmc.wortkatze.learn.Deck$$serializer       -> bh:
+ch.lkmc.wortkatze.learn.Tier$$serializer       -> wr0:
+ch.lkmc.wortkatze.learn.UiText$$serializer     -> st0:
+ch.lkmc.wortkatze.learn.Vocabulary$$serializer -> yv0:
+```
+
+All five survive R8. The specific failure mode the finding describes — stripped
+field descriptors — is covered by the consumer rules kotlinx-serialization
+1.11.0 ships and AGP applies automatically
+(`META-INF/com.android.tools/proguard/kotlinx-serialization-common.pro`), whose
+last rule is literally
+`-keepclassmembers public class **$$serializer { private ** descriptor; }`.
+No rule added; a redundant one would only look like insurance.
+
+CI now runs `assembleRelease` on every PR, so this stays proven rather than
+being a claim about one afternoon.
+
+**„Verify the pinned action SHAs and future-looking tags resolve."**
+Fair thing to ask; all seven check out against their tags via
+`git ls-remote`: `actions/checkout@v7.0.1`, `actions/setup-java@v5.7.0`,
+`actions/upload-artifact@v7.0.1`, `actions/download-artifact@v8.0.1`,
+`softprops/action-gh-release@v3.0.2`, `gradle/actions@v5.0.2`,
+`L-K-M/zai-code-review@v0.0.9`. No change needed.
+
+### Round 2 — re-raised after being declined
+
+`ß`/Swiss spelling, the debug-keystore "hardcoded passwords", and the KSP ↔
+Kotlin version pairing all came back unchanged, having been answered above with
+evidence. Per [CLAUDE.md](CLAUDE.md) a re-raise of a recorded decline is a
+steady-state signal, not a new finding.
+
+### Round 2 — declined
+
+**„`gross` is taught twice with different translations (大 big / 高 tall)."**
+Both cards are correct German — *er ist gross* is "he is tall" — so this is not
+a data error, and `tools/vocab.py` is byte-identical to the Pebble app's copy
+by decision 0001 anyway. The finding did surface a real *downstream* risk the
+plan had not covered, though: a Quiz question could offer both translations and
+mark a correct one wrong. Fixed where it belongs, in
+`docs/plan/15-mode-quiz.md` — distractors now exclude any card sharing the
+answer card's German, with the „gross" pair named as the test fixture.
+
+**„`*.svg binary` in `.gitattributes` prevents useful diffs."**
+True in general; there are no SVGs in this repository. If hand-edited SVG ever
+lands, revisit then.
+
+**„Confirm the Pebble save-slot ordering is safe."**
+About the sibling app, not this one. Progress here is keyed by
+`deckKey/German`, which is exactly why reordering is free — stated in
+`docs/decisions/0001` and `docs/plan/03-vocabulary.md`.
+
 ### Noted — no action
 
 **„`Question` cannot colour a noun's article without string parsing."**

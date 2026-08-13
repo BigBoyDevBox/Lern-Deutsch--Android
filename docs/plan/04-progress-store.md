@@ -23,8 +23,12 @@ data class Progress(
     val xp: Int = 0,
     val stickers: Set<String> = emptySet(),
     val dailyGoal: Int = 20,
+    /** The day `goalAnswered` counts for; set on the day's first answer. */
     val goalDay: String? = null,
     val goalAnswered: Int = 0,
+    /** The day the goal was last celebrated. Deliberately separate from
+     *  [goalDay] — see 17-rewards.md; one field cannot do both jobs. */
+    val goalCompletedDay: String? = null,
     val settings: Settings = Settings(),
 ) {
     companion object { const val SCHEMA = 1 }

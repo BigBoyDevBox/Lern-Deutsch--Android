@@ -34,8 +34,13 @@ Rules:
   full. Hearing the article with the noun is the entire point.
 * Speak on tap only. Never auto-speak on card reveal: she may be in class, on a
   bus, or next to a sleeping sibling.
-* `shutdown()` from the Activity's `onDestroy`. A leaked TTS engine keeps a
-  service bound.
+* Call `stop()` when the Activity pauses, so speech does not continue over a
+  backgrounded app. **Do not call `shutdown()` from the Activity's
+  `onDestroy`.** `Speaker` is a `@Singleton` and outlives the Activity, but
+  `shutdown()` releases the engine irreversibly — so the first configuration
+  change that recreates the Activity would leave a live singleton whose
+  `say()` silently does nothing for the rest of the process. The bound service
+  goes away with the process; that is soon enough.
 * Queue mode `QUEUE_FLUSH` — tapping twice means "say it again", not "say it
   twice".
 

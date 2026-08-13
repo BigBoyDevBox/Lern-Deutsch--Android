@@ -31,7 +31,11 @@ class VocabAssetTest {
     fun `parses the shipped asset`() {
         assertEquals(Vocabulary.SCHEMA, vocabulary.schema)
         assertEquals(4, vocabulary.tiers.size)
-        assertTrue(vocabulary.decks.size >= 80, "expected the full deck shelf")
+        // Exact, like the card count: a tolerance here would let a whole deck
+        // vanish unnoticed. Both numbers are meant to change only when someone
+        // deliberately edits tools/vocab.py, and then this test is the reminder
+        // to update the docs that quote them.
+        assertEquals(81, vocabulary.decks.size)
         assertEquals(1204, vocabulary.allCards.size)
     }
 
@@ -76,8 +80,11 @@ class VocabAssetTest {
 
     @Test
     fun `withoutArticle strips exactly the article`() {
-        val noun = vocabulary.allCards.first { it.gender == Gender.DER }
-        assertEquals(noun.de.substringAfter(' '), noun.withoutArticle)
+        // A literal expectation, not one derived from substringAfter — deriving
+        // it would only prove withoutArticle agrees with whatever it is
+        // implemented as.
+        val mann = vocabulary.allCards.first { it.id == "people/der Mann" }
+        assertEquals("Mann", mann.withoutArticle)
 
         val other = vocabulary.allCards.first { it.gender == Gender.NONE }
         assertEquals(other.de, other.withoutArticle, "non-nouns must pass through untouched")
