@@ -1,6 +1,5 @@
 package ch.lkmc.wortkatze.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
@@ -17,8 +16,8 @@ import androidx.compose.ui.unit.sp
  * **Light-only on purpose** (docs/decisions/0003). A kawaii candy surface is a
  * light design; the dark version is a different design rather than the same one
  * with inverted tokens, and shipping a mechanical inversion would look broken.
- * [isSystemInDarkTheme] is deliberately ignored — don't wire it up without the
- * dark palette the decision record asks for.
+ * `isSystemInDarkTheme()` is deliberately never called — don't wire it up
+ * without the dark palette the decision record asks for.
  */
 private val CandyColors = lightColorScheme(
     primary = Candy.Bubblegum,

@@ -28,12 +28,18 @@ object Candy {
     val Shadow = Color(0x1A3A2F4A)
 
     // --- Brand -------------------------------------------------------------
-    val Bubblegum = Color(0xFFFF5FA2)
-    val BubblegumDeep = Color(0xFFE03C82)
+    // Deliberately NOT the same pink as [Die]. Both are pink — it is a cat app
+    // — but an article chip has to stay legible on a brand-coloured banner, and
+    // rule 1 above is only true if the article colours really are unique.
+    // `CandyPaletteTest` proves they are.
+    val Bubblegum = Color(0xFFFF3D7F)
+    val BubblegumDeep = Color(0xFFD62E67)
 
     // --- Article colours (see rule 1 above) --------------------------------
+    // Tuned to the Pebble app's der/die/das (PictonBlue, BrilliantRose,
+    // a green) so a learner's association survives the move to the phone.
     val Der = Color(0xFF3E9BFF)
-    val Die = Color(0xFFFF5FA2)
+    val Die = Color(0xFFFF55AA)
     val Das = Color(0xFF26C6A6)
 
     // --- Verdicts ----------------------------------------------------------
@@ -69,4 +75,10 @@ object Candy {
 
     /** Every accent token this build knows — used by tests, not by screens. */
     val accentTokens: Set<String> get() = accents.keys
+
+    /** The three article colours, for the test that keeps them exclusive. */
+    val articleColors: List<Color> get() = listOf(Der, Die, Das)
+
+    /** Every colour that is allowed to appear as a large filled surface. */
+    val surfaceColors: List<Color> get() = accents.values.toList() + Bubblegum + BubblegumDeep
 }

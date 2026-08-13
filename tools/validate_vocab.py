@@ -108,6 +108,8 @@ def check_cards(key, cards):
         # phrase that merely happens to start with an article („die
         # Speisekarte, bitte"), and phrases carry no gender by design.
         tokens = de.split()
+        if not tokens:
+            continue          # already reported as empty above; tokens[0] would raise
         if gender:
             if tokens[0] not in ARTICLE_GENDER:
                 err("%s: gender %r but %r has no article" % (where, gender, de))
@@ -132,11 +134,21 @@ def check_cards(key, cards):
             warn("%s: Chinese side %r has no CJK characters" % (where, zh))
 
 
+def well_formed(deck):
+    """The cards of `deck` that check_cards did not reject outright.
+
+    check_cards reports a malformed tuple and moves on, so everything after it
+    has to filter too — unpacking a 3-tuple into four names raises ValueError
+    and turns an error report into a traceback.
+    """
+    return [c for c in (deck.get("cards") or []) if len(c) == 4]
+
+
 def check_pos():
     """Re-prove the two derivations vocab_pos.py relies on, and the curated sets."""
     all_de = {}
     for deck in vocab.GROUPS:
-        for de, zh, en, gender in deck["cards"]:
+        for de, zh, en, gender in well_formed(deck):
             all_de.setdefault(de, []).append((deck["key"], en, gender))
 
     # Every curated word must actually exist, or the list has rotted.
@@ -173,7 +185,7 @@ def check_pos():
 
     counts = {}
     for deck in vocab.GROUPS:
-        for de, zh, en, gender in deck["cards"]:
+        for de, zh, en, gender in well_formed(deck):
             pos = vocab_pos.classify(de, en, gender)
             counts[pos] = counts.get(pos, 0) + 1
 

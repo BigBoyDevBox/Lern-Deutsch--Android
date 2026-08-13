@@ -15,10 +15,10 @@
 
     <!-- Ears (outer) -->
     <path
-        android:fillColor="#FF5FA2"
+        android:fillColor="#FF3D7F"
         android:pathData="M38,44 L33,24 L54,38 Z" />
     <path
-        android:fillColor="#FF5FA2"
+        android:fillColor="#FF3D7F"
         android:pathData="M70,44 L75,24 L54,38 Z" />
 
     <!-- Inner ears -->
@@ -31,7 +31,7 @@
 
     <!-- Head -->
     <path
-        android:fillColor="#FF5FA2"
+        android:fillColor="#FF3D7F"
         android:pathData="M32,57 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0 Z" />
 
     <!-- Eyes -->

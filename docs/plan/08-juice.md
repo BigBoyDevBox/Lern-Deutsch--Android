@@ -70,6 +70,11 @@ Model: each particle gets a seeded initial speed (200–520 px/s), an angle in a
 `x = vx·t`, `y = vy·t + ½·g·t²` with `g = 1400 px/s²`, alpha fading over the
 last 300 ms, scale shrinking to 0.6.
 
+**The speeds are per second and the parameter is in milliseconds**, so the
+first line of `at()` converts: `val t = tMillis / 1000f`. Feeding `tMillis`
+straight into the formula puts every particle a hundred screen-widths away on
+the first frame, which looks exactly like the burst not firing at all.
+
 Draw it in a `Canvas` inside the round screen, driven by a
 `withInfiniteAnimationFrameMillis`-style loop that stops when the burst ends —
 **never leave an animation running after its effect is over**. The Pebble app

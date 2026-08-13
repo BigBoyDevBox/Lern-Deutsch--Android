@@ -31,9 +31,12 @@ echo "Installing Android SDK into $SDK_DIR ..."
 mkdir -p "$SDK_DIR/cmdline-tools"
 if ! find_sdkmanager >/dev/null 2>&1; then
   TMP_ZIP="$(mktemp --suffix=.zip)"
+  # set -e means a curl or unzip failure exits before any cleanup line would
+  # run, so the trap — not an rm at the end — is what stops a retrying agent
+  # session from filling /tmp with half-downloaded SDK archives.
+  trap 'rm -f "$TMP_ZIP"' EXIT
   curl -fsSL -o "$TMP_ZIP" "$CMDLINE_TOOLS_URL"
   unzip -q -o "$TMP_ZIP" -d "$SDK_DIR/cmdline-tools"
-  rm -f "$TMP_ZIP"
   # The archive extracts to "cmdline-tools/"; normalize to ".../latest".
   if [ -d "$SDK_DIR/cmdline-tools/cmdline-tools" ]; then
     rm -rf "$SDK_DIR/cmdline-tools/latest"

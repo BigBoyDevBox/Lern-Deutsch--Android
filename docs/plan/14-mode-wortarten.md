@@ -75,13 +75,16 @@ object WortartenPool {
 }
 ```
 
-Per class: take `round(size * weight)` cards from
-`Selection.forMode(vocabulary, { it.pos == klass }, …)`. If a class comes up
-short, top up from the others in the order verb → adjective → noun. Shuffle the
-result once at the end.
+Take verbs and adjectives first, at `round(size * weight)` each, from
+`Selection.forMode(vocabulary, { it.pos == klass }, …)`. Then take nouns as
+**whatever is left**: `size - verbs - adjectives`. If a class comes up short,
+top up from the others in the order verb → adjective → noun. Shuffle the result
+once at the end.
 
-Rounding: allocate nouns last so the remainder lands on the easy class rather
-than starving a hard one.
+Rounding three weights independently does not sum to `size` (at 16 it gives
+5 + 6 + 6 = 17), so exactly one class has to absorb the remainder. Nouns do,
+because they are the easy third — a rounding error should cost the mode a
+little difficulty, never a card.
 
 ## Files
 
@@ -115,8 +118,9 @@ seeing correct German.
 
 * `WortartenQuestionTest`: `correctIndex` is right for a noun, a verb and an
   adjective; an `other` card throws; choices are always in the fixed order.
-* `WortartenPoolTest`: a size-20 round is within ±1 of 6/7/7; a filter that
-  starves one class still returns 20 cards; the same seed gives the same round;
-  no card appears twice; no card has `pos == OTHER`.
+* `WortartenPoolTest`: a size-20 round is 6/7/7; a size-16 round totals exactly
+  16 (the rounding case above); a filter that starves one class still returns
+  the full `size`; the same seed gives the same round; no card appears twice;
+  no card has `pos == OTHER`.
 * Playing a round: a wrong answer shows the reason line for the *correct*
   class, not for the one she tapped.

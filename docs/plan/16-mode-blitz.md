@@ -56,12 +56,17 @@ tone ([08](08-juice.md)).
 
 ```kotlin
 class BlitzClock(private val startMs: Long = BlitzScore.START_CLOCK_MS) {
+    /** Milliseconds left at [elapsedMs] since the round began; never below 0. */
     fun remaining(elapsedMs: Long): Long
-    fun reward(): Unit    // adds TIME_BONUS_MS, capped at MAX_CLOCK_MS
-    fun penalty(): Unit
-    val expired: Boolean
+    fun reward()          // adds TIME_BONUS_MS, capped at MAX_CLOCK_MS
+    fun penalty()         // subtracts TIME_PENALTY_MS
+    fun isExpired(elapsedMs: Long): Boolean = remaining(elapsedMs) == 0L
 }
 ```
+
+Note that "expired" is a **function of the elapsed time**, not a property. The
+clock accumulates rewards and penalties but never learns what time it is, so it
+cannot answer "are we done?" without being told how long the round has run.
 
 Pure: it is told the elapsed time, it never reads a clock ([02](02-architecture.md)).
 The ViewModel drives it from a coroutine ticking every 100 ms and stops that
@@ -118,7 +123,8 @@ is skipped and the next takes its turn.
   combo 1, 4, 5, 9, 10, 19, 20, 50.
 * `BlitzClockTest`: starts at 60 s; a reward adds 1 s; the cap holds at 90 s
   after many rewards; a penalty subtracts 2 s; the clock cannot go below 0;
-  `expired` is true at exactly 0.
+  `isExpired` is true at exactly the moment `remaining` reaches 0 and false one
+  millisecond earlier.
 * `BlitzPoolTest`: a 60-question walk contains all three kinds; no question is
   ever malformed; the same seed reproduces the run.
 * Playing: the clock visibly gains time on a good streak, and the round ends

@@ -67,8 +67,8 @@ ch.lkmc.wortkatze
 │   │   ├── Round.kt         the shared session loop                    (step 5)
 │   │   ├── Question.kt      prompt/answer/choices for one question     (step 5)
 │   │   ├── Direction.kt     DE_ZH, ZH_DE, DE_EN, EN_DE                 (step 5)
-│   │   ├── Distractors.kt   wrong-answer choice, seeded                (step 12)
-│   │   └── Blitz.kt         the timed variant + combo maths            (step 14)
+│   │   ├── Distractors.kt   wrong-answer choice, seeded          (step 12 Quiz)
+│   │   └── Blitz.kt         the timed variant + combo maths     (step 14 Blitz)
 │   └── juice/
 │       └── Confetti.kt      pure particle simulation                   (step 7)
 ├── data/
@@ -85,9 +85,16 @@ ch.lkmc.wortkatze
 └── di/AppModule.kt
 ```
 
-Steps in brackets are the roadmap step that creates the file
+Steps in brackets are the **roadmap step** that creates the file
 ([22](22-roadmap-foundations.md), [23](23-roadmap-modes.md)). Files without a
 step number already exist.
+
+Careful: roadmap steps and plan-file numbers are two different sequences that
+overlap in range. Quiz is **roadmap step 12** and is specified in **plan file
+15**; Blitz is **roadmap step 14** and is specified in **plan file 16**. Where
+it could be misread, the step number above names its mode as a check. Roadmap
+steps are the order you build in; file numbers are only where things are
+written down.
 
 ## MVVM, precisely
 

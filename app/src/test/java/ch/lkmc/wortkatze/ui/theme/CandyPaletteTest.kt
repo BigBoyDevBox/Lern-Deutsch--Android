@@ -36,7 +36,20 @@ class CandyPaletteTest {
 
     @Test
     fun `the three article colours are distinct`() {
-        val articles = listOf(Candy.Der, Candy.Die, Candy.Das)
-        assertEquals(3, articles.toSet().size, "der/die/das must never share a colour")
+        assertEquals(
+            3,
+            Candy.articleColors.toSet().size,
+            "der/die/das must never share a colour",
+        )
+    }
+
+    @Test
+    fun `no article colour is reused as a surface colour`() {
+        // The palette's first rule is that der/die/das mean gender and nothing
+        // else. Brand pink and "die" pink were literally the same value once,
+        // which would have put a pink article chip on a pink banner with zero
+        // contrast the first time the two met.
+        val clashes = Candy.articleColors.filter { it in Candy.surfaceColors }
+        assertTrue(clashes.isEmpty(), "article colours reused as surfaces: $clashes")
     }
 }

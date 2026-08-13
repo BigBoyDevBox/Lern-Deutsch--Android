@@ -13,8 +13,13 @@ says so.
 // data/MotionSettings.kt
 fun reduceMotionEnabled(context: Context): Boolean =
     Settings.Global.getFloat(context.contentResolver,
-        Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
+        Settings.Global.ANIMATOR_DURATION_SCALE, 1f) < 0.01f
 ```
+
+A threshold rather than `== 0f`: the setting is a float, some OEM skins write a
+near-zero value instead of a true zero, and an exact comparison that misses by
+one ulp silently denies the feature to the exact person it exists for. Erring
+toward "reduce motion" is the safe direction.
 
 Combine it with `Settings.reduceMotion` from the progress document (the
 in-app switch) and put the result in a `CompositionLocal`:

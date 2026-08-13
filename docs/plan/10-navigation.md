@@ -28,9 +28,9 @@ six seconds.
 @Serializable data class DeckPicker(val mode: String)
 @Serializable data class Round(
     val mode: String,
+    val seed: Long,                        // required, so it precedes the defaults
     val deckKey: String? = null,
     val direction: String? = null,
-    val seed: Long,
 )
 @Serializable object Album
 @Serializable object Settings

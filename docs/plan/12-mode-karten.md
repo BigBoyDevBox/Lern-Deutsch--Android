@@ -44,6 +44,12 @@ Full-width `StickerCard`, roughly 2:3, centred, `36dp` corners, 8dp shadow.
 * For a German noun, the article is drawn in its gender colour and the noun in
   `Ink`. This is the whole gender-teaching mechanism in this mode, and it is
   free.
+
+  Do not split `Question.prompt` on a space to do this. `Question` carries the
+  whole `Card`, so the face reads `question.card.gender` and
+  `question.card.withoutArticle` and never parses a string — which also means
+  „die Speisekarte, bitte" (a phrase that merely starts with an article, gender
+  `NONE`) renders as plain text, exactly as it should.
 * Nothing else. No hint, no gloss, no button labels on the card itself.
 * A small **🔊** in the corner for German fronts ([18](18-audio-haptics.md)).
 * A **↻** in the opposite corner when `Question.repeat` is true — "you've seen

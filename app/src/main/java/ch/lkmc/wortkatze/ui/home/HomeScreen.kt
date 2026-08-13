@@ -42,12 +42,16 @@ import ch.lkmc.wortkatze.ui.theme.Candy
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    // Read the nullable field into a local so the else branch smart-casts;
+    // reading state.vocabulary again there would need a !!, which this repo
+    // doesn't allow outside tests (docs/plan/24).
+    val vocabulary = state.vocabulary
 
     Surface(color = Candy.Cream, modifier = Modifier.fillMaxSize()) {
         when {
             state.loading -> Centered { CircularProgressIndicator(color = Candy.Bubblegum) }
 
-            state.failed || state.vocabulary == null -> Centered {
+            state.failed || vocabulary == null -> Centered {
                 Text(
                     text = stringResource(R.string.vocab_load_failed),
                     style = MaterialTheme.typography.titleMedium,
@@ -57,7 +61,6 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             }
 
             else -> {
-                val vocabulary = state.vocabulary!!
                 LazyColumn(
                     contentPadding = PaddingValues(20.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
