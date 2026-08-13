@@ -4,4 +4,16 @@
 <resources>
     <string name="app_tagline">Deutsche Wörter fangen!</string>
     <string name="vocab_load_failed">Die Wortliste konnte nicht geladen werden.</string>
+
+    <!-- The German halves of the bilingual gender labels, defined alike so
+         BilingualLabel shows the word once (docs/plan/19). -->
+    <string name="gender_masculine">Maskulinum</string>
+    <string name="gender_feminine">Femininum</string>
+    <string name="gender_neuter">Neutrum</string>
+
+    <string name="cd_stars">%1$d von %2$d Sternen</string>
+    <plurals name="cd_streak_days">
+        <item quantity="one">%1$d Tag in Folge</item>
+        <item quantity="other">%1$d Tage in Folge</item>
+    </plurals>
 </resources>

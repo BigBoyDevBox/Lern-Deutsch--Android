@@ -2,4 +2,13 @@
 <resources>
     <string name="app_tagline">一起来抓德语单词！</string>
     <string name="vocab_load_failed">词库加载失败。</string>
+
+    <string name="gender_masculine">阳性</string>
+    <string name="gender_feminine">阴性</string>
+    <string name="gender_neuter">中性</string>
+
+    <string name="cd_stars">%2$d 颗星中的 %1$d 颗</string>
+    <plurals name="cd_streak_days">
+        <item quantity="other">连续 %1$d 天</item>
+    </plurals>
 </resources>

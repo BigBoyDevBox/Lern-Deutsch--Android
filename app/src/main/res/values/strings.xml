@@ -12,4 +12,29 @@
 
     <string name="app_tagline">Catch German words!</string>
     <string name="vocab_load_failed">The word list could not be loaded.</string>
+
+    <!-- The article words are content — they are the answer — and are never
+         translated (docs/plan/19). -->
+    <string name="article_der" translatable="false">der</string>
+    <string name="article_die" translatable="false">die</string>
+    <string name="article_das" translatable="false">das</string>
+
+    <!-- The three gender names, bilingual-label style (docs/plan/19): the
+         German half is content and stays German in every locale; the other
+         half is translated. The German locale defines both halves alike so
+         BilingualLabel shows the word once. -->
+    <string name="gender_masculine_de" translatable="false">Maskulinum</string>
+    <string name="gender_feminine_de" translatable="false">Femininum</string>
+    <string name="gender_neuter_de" translatable="false">Neutrum</string>
+    <string name="gender_masculine">Masculine</string>
+    <string name="gender_feminine">Feminine</string>
+    <string name="gender_neuter">Neuter</string>
+
+    <!-- Assistive descriptions: the stars and the flame count are drawn, so
+         TalkBack needs the sentence, not the picture. -->
+    <string name="cd_stars">%1$d of %2$d stars</string>
+    <plurals name="cd_streak_days">
+        <item quantity="one">Streak: %1$d day</item>
+        <item quantity="other">Streak: %1$d days</item>
+    </plurals>
 </resources>
