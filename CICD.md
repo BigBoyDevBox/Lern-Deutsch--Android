@@ -66,6 +66,16 @@ explicit `concurrency:` group, `timeout-minutes:` on every job, and
 - **Keep files small.** The reviewer fails on very large files, which is why
   the plan is split across `docs/plan/*` rather than living in one PLAN.md. A
   PR that adds a 2000-line file gets no review at all.
+- **Bootstrap quirk, learned the hard way (PR #2).** `pull_request_target`
+  workflows are read from the **base** branch, never from the PR's head —
+  which is the security property the trigger exists for, since it stops a fork
+  PR from rewriting the privileged workflow that holds the key. The
+  consequence in a fresh repository is that this workflow, introduced inside a
+  PR, reviews nothing at all until a copy exists on `main`. PR #1 opened, went
+  green, and got no review; PR #2 put the file on `main` by itself, and the
+  next push to #1 was reviewed. Any future change to the *trigger* of this
+  workflow lands the same way: merge it to `main` first, then push to the PR
+  you want reviewed under the new rules.
 
 ## Secrets
 
