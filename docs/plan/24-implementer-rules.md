@@ -2,8 +2,8 @@
 
 Read this once, before your first step. It is short on purpose.
 
-The prompt that starts a step — and the rule that one step is one session — is
-in [25](25-implementer-prompt.md).
+The prompt that drives the whole build — steps 1 to 17, one pull request each
+— is in [25](25-implementer-prompt.md).
 
 ## The shape of a step
 
