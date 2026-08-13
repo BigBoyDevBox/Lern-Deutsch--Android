@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon variant (Android 13+): one silhouette, tinted by the system.
+     Eyes and nose are cut out of the head as holes rather than drawn on top,
+     because every path here ends up the same colour. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108"
+    android:tint="#FF000000">
+
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M38,44 L33,24 L54,38 Z M70,44 L75,24 L54,38 Z M32,57 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0 Z M42.5,54 a3.6,3.6 0 1,0 7.2,0 a3.6,3.6 0 1,0 -7.2,0 Z M58.3,54 a3.6,3.6 0 1,0 7.2,0 a3.6,3.6 0 1,0 -7.2,0 Z M50.5,61 L57.5,61 L54,65.5 Z" />
+</vector>

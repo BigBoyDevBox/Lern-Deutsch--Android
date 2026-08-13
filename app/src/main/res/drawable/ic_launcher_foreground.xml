@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mimi, the mascot, as a launcher icon: a cat face in the brand pink.
+     108dp viewport with the art inside the 66dp safe zone (an adaptive icon
+     can be masked to a circle, a squircle or a teardrop, and anything outside
+     that zone may be cropped on some launchers).
+
+     The ears are drawn BEFORE the head so the head circle swallows their
+     bases — the Pebble app learned that one the hard way (awesome.md 1.7:
+     ears anchored at the head's equator float free once the circle narrows). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Ears (outer) -->
+    <path
+        android:fillColor="#FF5FA2"
+        android:pathData="M38,44 L33,24 L54,38 Z" />
+    <path
+        android:fillColor="#FF5FA2"
+        android:pathData="M70,44 L75,24 L54,38 Z" />
+
+    <!-- Inner ears -->
+    <path
+        android:fillColor="#FFC2DC"
+        android:pathData="M40,42 L37,30 L50,39 Z" />
+    <path
+        android:fillColor="#FFC2DC"
+        android:pathData="M68,42 L71,30 L58,39 Z" />
+
+    <!-- Head -->
+    <path
+        android:fillColor="#FF5FA2"
+        android:pathData="M32,57 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0 Z" />
+
+    <!-- Eyes -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M42.5,54 a3.6,3.6 0 1,0 7.2,0 a3.6,3.6 0 1,0 -7.2,0 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M58.3,54 a3.6,3.6 0 1,0 7.2,0 a3.6,3.6 0 1,0 -7.2,0 Z" />
+
+    <!-- Nose -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M50.5,61 L57.5,61 L54,65.5 Z" />
+
+    <!-- Whiskers -->
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M34,58 L24,55 M34,62 L24,63 M74,58 L84,55 M74,62 L84,63" />
+</vector>

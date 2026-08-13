@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pre-Compose window chrome only; everything visible is Compose-drawn.
+         The window background matches ui/theme/Color.kt Candy.Cream so the
+         launch frame doesn't flash a foreign colour.
+         windowLightStatusBar = true because the app is light-only by decision
+         (docs/decisions/0003) — dark status-bar icons on a cream ground. -->
+    <style name="Theme.Wortkatze" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/candy_cream</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

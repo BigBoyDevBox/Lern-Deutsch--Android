@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirrors ui/theme/Color.kt Candy.Cream / Candy.Blush; keep in sync by
+         hand (two uses: launch window background, launcher icon backdrop). -->
+    <color name="candy_cream">#FFF8F3</color>
+    <color name="candy_icon_bg">#FFE7F0</color>
+</resources>

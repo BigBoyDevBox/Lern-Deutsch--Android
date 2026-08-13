@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cloud backup (API 26-30 path). An allowlist, not a blocklist.
+
+     Progress IS worth backing up — a lost streak after a phone swap is the
+     one data loss this app can actually inflict — and it holds nothing
+     sensitive: no account, no name, just which words have been practised.
+     The vocabulary itself ships in the APK and never needs backing up. -->
+<full-backup-content>
+    <include domain="file" path="datastore" />
+    <include domain="sharedpref" path="." />
+</full-backup-content>
