@@ -102,6 +102,12 @@ def icon(name, where):
 GENDERS = {"": "none", "m": "der", "f": "die", "n": "das"}
 
 
+def gender_name(code, where):
+    if code not in GENDERS:
+        sys.exit("!! %s: unknown gender %r — add it to GENDERS" % (where, code))
+    return GENDERS[code]
+
+
 def card_id(deck_key, german):
     """Stable identity for one card, used as the SRS progress key.
 
@@ -135,7 +141,7 @@ def build():
                 "de": de,
                 "zh": zh,
                 "en": en,
-                "gender": GENDERS[gender],
+                "gender": gender_name(gender, "%s/%s" % (d["key"], de)),
                 "pos": vocab_pos.classify(de, en, gender),
             })
         decks.append({

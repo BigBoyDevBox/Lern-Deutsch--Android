@@ -76,9 +76,13 @@ written so a fresh session can pick up from a merged main with no handover
 notes.
 
 RULES THAT ARE NOT NEGOTIABLE:
-  - One step per PR. Not a step plus an improvement you noticed along the way.
-    If you spot something else worth doing, write it in the PR body as a
-    follow-up and leave it alone.
+  - One step per PR. If you spot a genuine improvement that is outside the
+    current step's scope, do not fold it into that step's PR — but do not throw
+    it away either. Finish and merge the step, then do the improvement as its
+    own PR, through the same loop, before starting the next step. Title it
+    "Improve: <what>" so it is obvious it is not a roadmap step. If you are not
+    sure it is worth doing, note it in the step's PR body and move on — every
+    improvement PR costs a full review cycle, so they should be worth one.
   - Nothing in learn/ may import android.*, take a Context, call
     System.currentTimeMillis(), or use an unseeded Random. Time and randomness
     are parameters. The entire test strategy depends on this.
@@ -104,10 +108,6 @@ IF THE PLAN IS WRONG: it will be, somewhere. Say so plainly in the PR body, fix
 the plan file in the SAME PR, and add a line to AGENTS.md under "Conventions
 and footguns" if the next person would trip on it too. Do not quietly diverge
 from the plan, and do not follow a spec you can see is broken.
-
-IF YOU GET GENUINELY STUCK: stop and say exactly what you tried and what
-happened. Do not invent an alternative design to route around a blocker, and do
-not skip the step and carry on.
 ```
 
 ---

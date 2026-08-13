@@ -38,9 +38,19 @@ The wrong answers are the whole quality of this mode. Three rules:
 1. **Same deck first.** Distractors come from the same deck as the answer, so a
    Food round offers food. Cross-deck distractors are trivially eliminable and
    turn a vocabulary test into a category test.
-2. **Never a duplicate of the answer text.** Two cards can share a translation
-   („gross" appears in two decks); compare the *rendered answer strings*, not
-   the card ids.
+2. **Never a duplicate of the answer text, and never a card that shares the
+   answer card's German.** Both halves matter, and the second is the subtle
+   one. „gross" is taught twice — 大 „big" in *Alltag*, 高 „tall" in
+   *Aussehen* — and both are correct German. Filtering only on the rendered
+   answer string lets a `DE_ZH` question prompt „gross" with 大 as the answer
+   and 高 sitting there as a distractor: a learner who picks 高 is marked
+   wrong for a right answer. Exclude on `card.de` as well as on the answer
+   text, and the question stays honest whichever of the two was drawn.
+
+   `validate_vocab.py` already warns about words taught in two decks, so the
+   pool of affected cards is visible at build time — but the fix belongs here,
+   not in the word list, which is shared verbatim with the Pebble app
+   (`docs/decisions/0001`).
 3. **Widen only when forced.** If the deck cannot supply three distinct
    distractors, widen to the tier, then to the whole vocabulary. Decks in this
    word list are 12–22 cards, so widening is rare — but Blitz filters can make
@@ -96,9 +106,10 @@ learn/round/QuizQuestion.kt
 ## Done when
 
 * `DistractorsTest`: exactly 3 by default; never equal to the answer text;
-  never duplicated among themselves; prefers the deck pool; widens to the
-  fallback when the pool is too small; returns fewer than 3 only when both are
-  exhausted; same seed → same distractors.
+  never drawn from a card sharing the answer card's German (use the real
+  „gross" pair as the fixture); never duplicated among themselves; prefers the
+  deck pool; widens to the fallback when the pool is too small; returns fewer
+  than 3 only when both are exhausted; same seed → same distractors.
 * `QuizQuestionTest`: `correctIndex` always points at the correct string after
   shuffling; all four directions produce prompts and answers from the right
   fields; a card in a 2-card pool with no fallback yields `null`.

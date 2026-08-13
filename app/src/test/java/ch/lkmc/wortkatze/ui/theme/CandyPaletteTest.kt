@@ -15,8 +15,9 @@ import kotlin.test.assertTrue
 class CandyPaletteTest {
 
     private val vocabulary = VocabParser.parse(
-        checkNotNull(javaClass.getResourceAsStream("/vocab.json")).bufferedReader()
-            .use { it.readText() }
+        checkNotNull(javaClass.getResourceAsStream("/vocab.json")) {
+            "vocab.json is not on the test classpath — check the test sourceSet in app/build.gradle.kts"
+        }.bufferedReader().use { it.readText() }
     )
 
     private val used: Set<String>

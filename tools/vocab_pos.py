@@ -114,7 +114,12 @@ def is_derived_verb(german, english):
 
 
 def classify(german, english, gender):
-    """Return the Wortart for one card. Never raises; `other` is a valid answer."""
+    """Return the Wortart for one card. `other` is a valid answer, not a failure.
+
+    Precondition: `german` and `english` are strings (possibly empty), never
+    None — `validate_vocab.py` rejects a card with a missing side before
+    anything calls this. Empty strings are handled and classify as `other`.
+    """
     if gender in ("m", "f", "n"):
         return NOUN
     if german in EXTRA_NOUNS:

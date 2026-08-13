@@ -83,7 +83,10 @@ def check_cards(key, cards):
     seen_de = set()
     for i, card in enumerate(cards):
         where = "deck %s card %d" % (key, i)
-        if len(card) != 4:
+        if not isinstance(card, (tuple, list)) or len(card) != 4:
+            # isinstance first: a stray None or int in the list would make
+            # len() raise, and a traceback is the one output this tool must
+            # never produce.
             err("%s: expected a 4-tuple (de, zh, en, gender)" % where)
             continue
         de, zh, en, gender = card
@@ -141,7 +144,8 @@ def well_formed(deck):
     has to filter too — unpacking a 3-tuple into four names raises ValueError
     and turns an error report into a traceback.
     """
-    return [c for c in (deck.get("cards") or []) if len(c) == 4]
+    return [c for c in (deck.get("cards") or [])
+            if isinstance(c, (tuple, list)) and len(c) == 4]
 
 
 def check_pos():
@@ -149,7 +153,7 @@ def check_pos():
     all_de = {}
     for deck in vocab.GROUPS:
         for de, zh, en, gender in well_formed(deck):
-            all_de.setdefault(de, []).append((deck["key"], en, gender))
+            all_de.setdefault(de, []).append((deck.get("key", "?"), en, gender))
 
     # Every curated word must actually exist, or the list has rotted.
     for word in sorted(vocab_pos.ADJECTIVES):
@@ -218,7 +222,7 @@ def main():
     counts = check_pos()
     check_ui()
 
-    total = sum(len(d["cards"]) for d in vocab.GROUPS)
+    total = sum(len(d.get("cards") or []) for d in vocab.GROUPS)
     print("-- %d tiers, %d decks, %d cards"
           % (len(vocab.TIERS), len(vocab.GROUPS), total))
     print("-- Wortarten: %s"
